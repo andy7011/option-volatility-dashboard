@@ -1,7 +1,7 @@
 MAP = {
     'RIH5': {
         'strike_step': 2500,
-        'max_strikes_count': 7,
+        'max_strikes_count': 11,
     },
     'SiH5': {
         'strike_step': 1000,
