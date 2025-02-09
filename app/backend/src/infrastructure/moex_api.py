@@ -10,6 +10,7 @@ _SECURITY_DESCRIPTION_URL_TEMPLATE = Template('/iss/securities/$ticker.json')
 _OPTION_EXPIRATIONS_URL = Template('/iss/statistics/engines/futures/markets/options/assets/$ticker.json')
 _OPTION_SERIES_URL = '/iss/statistics/engines/futures/markets/options/series.json'
 _OPTION_BOARD_URL_TEMPLATE = Template('/iss/statistics/engines/futures/markets/options/assets/$ticker/optionboard.json')
+_FUTURES_SERIES_URL = Template('/iss/statistics/engines/futures/markets/forts/series.json')
 
 
 def _make_absolute_url(relative_url: str) -> str:
@@ -23,6 +24,12 @@ def get_security_description(ticker: str):
     url = _make_absolute_url(_SECURITY_DESCRIPTION_URL_TEMPLATE.substitute(ticker=ticker))
     response = get_object_from_json_endpoint(url)
     return _convert_moex_data_structure_to_list_of_dicts(response['description'])
+
+# Фьючерсные серии по базовому активу (напр. RTS)
+def get_futures_series(asset_code: str):
+    url = _make_absolute_url(_FUTURES_SERIES_URL.substitute(ticker=asset_code))
+    response = get_object_from_json_endpoint(url, params={'asset_code': asset_code})
+    return _convert_moex_data_structure_to_list_of_dicts(response['series'])
 
 
 def get_option_series(asset_code: str):
