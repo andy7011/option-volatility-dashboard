@@ -81,6 +81,3 @@ def _vega(S, sigma, K, T, r, opt_type=option_type.CALL):
     elif opt_type == option_type.PUT:
         v = S * T ** 0.5 * norm.pdf(-d1)
     return v
-
-
-
