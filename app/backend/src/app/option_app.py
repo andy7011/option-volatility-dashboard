@@ -21,7 +21,7 @@ class OptionApp:
 
     def start(self):
         self._prepare_model()
-        self._start_flask_app()
+        # self._start_flask_app()
         self._subscribe_to_base_asset_events()
         self._alorApi.run_async_connection(env_utils.get_bool('DEBUG'))
 
@@ -55,6 +55,7 @@ class OptionApp:
                 self._watchedInstrumentsFilter.add_option_ticker(option.ticker)
 
     def _handle_option_quotes_event(self, ticker, data):
+        print(self._model.dump())
         option = self._model.option_repository.get_by_ticker(ticker)
         base_asset = self._model.base_asset_repository.get_by_ticker(option.base_asset_ticker)
         base_asset_last_price = base_asset.last_price
